@@ -1,0 +1,41 @@
+%%
+for k=[4,8,16]
+    Machine_precision(k) 
+end
+%%
+%%for matlab machine_precision
+e=1/2;
+while 1+e>1
+    e=e*1/2;
+end
+e=2*e,
+%%
+% function [e]=Machine_precision(d)
+% digits(d);
+% e=vpa(1/2);
+% while vpa(1)+e>vpa(1)
+%     e=vpa(e)*vpa(1/2);
+% end
+% e=e*vpa(2);
+% 
+% end
+
+%%
+syms f(x)
+f(x)=1/(1+x)+x;
+syms g(x)
+g(x)=-1/(1+x)^2+1;
+deltx=[];
+for i=0:20  
+    deltx=[10^(-i),deltx];
+end
+for j=1:21
+    a=2+deltx(j);
+    b=2-deltx(j);
+    fnum=(f(a)-f(b))/2*deltx(j);
+    Er=abs(g(2)-fnum)/abs(g(2));
+    E=[Er,E];
+end
+plot(E,deltx)
+
+E=[];

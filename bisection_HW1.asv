@@ -1,0 +1,27 @@
+f = @(x) 6*(exp(x)-x) - (7+3*x^2+2*x^3);
+bisection(f,-1,1,1e-6,300)
+
+function p=bisection(f,a,b,ToL,N0)
+i=1;
+if f(a)*f(b)>0
+    disp('the algorithm failed...')
+    return
+end
+while i<=N0
+    p=(a+b)/2;
+    if or(f(p)==0,abs(a-b)< ToL)
+        return
+    end
+    i=i+1;
+    if f(a)*f(p)>0
+        a=p; 
+    else 
+        b=p;   
+    end
+end
+
+if or(abs(a-b)> ToL,f(a)*f(b)>0)
+    disp('the algorithm failed...')
+    return
+end
+end
